@@ -156,13 +156,13 @@ Biblioteca (1) -----> (N) Libros
 ### 1️⃣ Clonar el repositorio
 
 ```bash
-git clone https://github.com/Nicko699/Biblioteca.git
+git clone https://github.com/Nicko699/Api-Biblioteca.git
 ```
 
 ### 2️⃣ Entrar al directorio del proyecto
 
 ```bash
-cd Biblioteca
+cd Api-Biblioteca
 ```
 
 ### 3️⃣ Configurar la base de datos
