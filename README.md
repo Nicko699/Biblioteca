@@ -5,7 +5,7 @@ Esta es una API REST de Biblioteca desarrollada con Spring Boot, cuyo objetivo e
 
 La API permite realizar operaciones CRUD (crear, leer, actualizar y eliminar) sobre las entidades Biblioteca y Libros, exponiendo endpoints REST que consumen y devuelven información en formato JSON.
 
-En el modelo de datos:
+🧠 Modelo de datos
 
 Una Biblioteca puede contener muchos Libros.
 
@@ -41,7 +41,7 @@ Eclipse
 
 Base de datos relacional:
 
-MySQL 
+MySQL
 
 Herramienta para probar la API:
 
@@ -67,9 +67,7 @@ GET	/biblioteca/{id}	Obtener biblioteca por ID
 POST	/biblioteca	Crear biblioteca
 PUT	/biblioteca/{id}	Editar biblioteca
 DELETE	/biblioteca/{id}	Eliminar biblioteca
-
 📌 Ejemplo POST /biblioteca
-
 {
   "nombre": "Biblioteca Central",
   "listaLibros": [
@@ -87,9 +85,7 @@ GET	/libros/{id}	Obtener libro por ID
 POST	/libros	Crear libro
 PUT	/libros/{id}	Editar libro
 DELETE	/libros/{id}	Eliminar libro
-
 📌 Ejemplo POST /libros
-
 {
   "nombre": "Spring in Action",
   "autor": "Craig Walls",
@@ -122,24 +118,6 @@ La API quedará disponible en:
 
 http://localhost:8080
 
-🧪 Códigos de respuesta HTTP
 
-200 OK → Operación exitosa
-
-201 Created → Recurso creado correctamente
-
-204 No Content → Recurso eliminado
-
-400 Bad Request → Datos inválidos
-
-404 Not Found → Recurso no encontrado
-
-✅ Buenas prácticas aplicadas
-
-✔ Arquitectura por capas
-✔ API RESTful
-✔ Uso de ResponseEntity
-✔ Paginación
-✔ Manejo correcto de relaciones JPA
 ✔ Serialización JSON segura
 ✔ Códigos HTTP estándar
