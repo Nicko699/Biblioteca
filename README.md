@@ -1,91 +1,132 @@
-📚 API REST Biblioteca
-📖 Descripción del proyecto
+# 📚 API REST Biblioteca
 
-Esta es una API REST de Biblioteca desarrollada con Spring Boot, cuyo objetivo es gestionar bibliotecas y libros aplicando una relación Uno a Muchos (One-To-Many) mediante JPA / Hibernate.
+> API REST para gestión de bibliotecas y libros con relación Uno a Muchos (One-To-Many) usando Spring Boot y JPA/Hibernate
 
-La API permite realizar operaciones CRUD (crear, leer, actualizar y eliminar) sobre las entidades Biblioteca y Libros, exponiendo endpoints REST que consumen y devuelven información en formato JSON.
+---
 
-🧠 Modelo de datos
+## 📖 Descripción del Proyecto
 
-Una Biblioteca puede contener muchos Libros.
+Esta es una **API REST de Biblioteca** desarrollada con **Spring Boot**, cuyo objetivo es gestionar bibliotecas y libros aplicando una relación **Uno a Muchos (One-To-Many)** mediante **JPA / Hibernate**.
 
-Cada Libro pertenece a una sola Biblioteca.
+La API permite realizar operaciones **CRUD** (crear, leer, actualizar y eliminar) sobre las entidades `Biblioteca` y `Libros`, exponiendo endpoints REST que consumen y devuelven información en formato **JSON**.
 
-El proyecto está estructurado en capas (Controller, Service y Model) y maneja correctamente:
+### ✨ Características principales
 
-Paginación de resultados
+- ✅ Operaciones CRUD completas
+- ✅ Paginación de resultados
+- ✅ Códigos de respuesta HTTP estándar
+- ✅ Serialización JSON sin referencias circulares
+- ✅ Arquitectura en capas (Controller, Service, Model)
+- ✅ Buenas prácticas REST
 
-Códigos de respuesta HTTP
+---
 
-Serialización JSON sin referencias circulares
+## 🧠 Modelo de Datos
 
-Buenas prácticas REST
+El proyecto implementa una relación **One-To-Many** entre las entidades:
 
-🛠️ Requisitos
+```
+Biblioteca (1) -----> (N) Libros
+```
 
-Para ejecutar el proyecto se necesita:
+- 📚 **Una Biblioteca** puede contener **muchos Libros**
+- 📖 **Cada Libro** pertenece a **una sola Biblioteca**
 
-Java JDK 17 o superior
+## 🛠️ Requisitos
 
-Apache Maven 3.8+
+### Software necesario
 
-Spring Boot
+| Herramienta | Versión mínima | Descripción |
+|------------|----------------|-------------|
+| ☕ **Java JDK** | 17+ | Lenguaje de programación |
+| 🧱 **Apache Maven** | 3.8+ | Gestor de dependencias |
+| 🗄️ **MySQL** | 8.0+ | Base de datos relacional |
+| 🔧 **IDE** | - | IntelliJ IDEA / NetBeans / Eclipse |
+| 📮 **Postman** | - | Para probar la API |
 
-IDE recomendado:
+---
 
-IntelliJ IDEA
+## 🚀 Tecnologías Utilizadas
 
-NetBeans
+- ☕ **Java 17**
+- 🌱 **Spring Boot** - Framework principal
+- 🗄️ **Spring Data JPA** - Persistencia de datos
+- 🐘 **Hibernate** - ORM (Object-Relational Mapping)
+- 🧱 **Maven** - Gestión de dependencias
+- 🗃️ **MySQL** - Base de datos relacional
 
-Eclipse
+---
 
-Base de datos relacional:
+## 📡 Endpoints de la API
 
-MySQL
+### 📘 Biblioteca
 
-Herramienta para probar la API:
+| Método | Endpoint | Descripción |
+|--------|----------|-------------|
+| `GET` | `/biblioteca` | Listar todas las bibliotecas (paginado) |
+| `GET` | `/biblioteca/{id}` | Obtener biblioteca por ID |
+| `POST` | `/biblioteca` | Crear nueva biblioteca |
+| `PUT` | `/biblioteca/{id}` | Editar biblioteca existente |
+| `DELETE` | `/biblioteca/{id}` | Eliminar biblioteca |
 
-Postman
+#### 📌 Ejemplo: Crear Biblioteca
 
-🚀 Tecnologías utilizadas
+**Request:** `POST /biblioteca`
 
-☕ Java
-
-🌱 Spring Boot
-
-🗄️ Spring Data JPA
-
-🐘 Hibernate
-
-🧱 Maven
-
-📡 Endpoints de la API
-📘 Biblioteca
-Método	Endpoint	Descripción
-GET	/biblioteca	Listar bibliotecas (paginado)
-GET	/biblioteca/{id}	Obtener biblioteca por ID
-POST	/biblioteca	Crear biblioteca
-PUT	/biblioteca/{id}	Editar biblioteca
-DELETE	/biblioteca/{id}	Eliminar biblioteca
-📌 Ejemplo POST /biblioteca
+```json
 {
   "nombre": "Biblioteca Central",
   "listaLibros": [
     {
       "nombre": "Clean Code",
       "autor": "Robert C. Martin"
+    },
+    {
+      "nombre": "The Pragmatic Programmer",
+      "autor": "Andrew Hunt"
     }
   ]
 }
+```
 
-📗 Libros
-Método	Endpoint	Descripción
-GET	/libros	Listar libros (paginado)
-GET	/libros/{id}	Obtener libro por ID
-POST	/libros	Crear libro
-PUT	/libros/{id}	Editar libro
-DELETE	/libros/{id}	Eliminar libro
-📌 Ejemplo POST /libros
+**Response:** `201 Created`
+
+```json
+{
+  "id": 1,
+  "nombre": "Biblioteca Central",
+  "listaLibros": [
+    {
+      "id": 1,
+      "nombre": "Clean Code",
+      "autor": "Robert C. Martin"
+    },
+    {
+      "id": 2,
+      "nombre": "The Pragmatic Programmer",
+      "autor": "Andrew Hunt"
+    }
+  ]
+}
+```
+
+---
+
+### 📗 Libros
+
+| Método | Endpoint | Descripción |
+|--------|----------|-------------|
+| `GET` | `/libros` | Listar todos los libros (paginado) |
+| `GET` | `/libros/{id}` | Obtener libro por ID |
+| `POST` | `/libros` | Crear nuevo libro |
+| `PUT` | `/libros/{id}` | Editar libro existente |
+| `DELETE` | `/libros/{id}` | Eliminar libro |
+
+#### 📌 Ejemplo: Crear Libro
+
+**Request:** `POST /libros`
+
+```json
 {
   "nombre": "Spring in Action",
   "autor": "Craig Walls",
@@ -93,31 +134,112 @@ DELETE	/libros/{id}	Eliminar libro
     "id": 1
   }
 }
+```
 
-📄 Paginación
+**Response:** `201 Created`
 
-Los endpoints GET soportan paginación usando Pageable.
+```json
+{
+  "id": 3,
+  "nombre": "Spring in Action",
+  "autor": "Craig Walls",
+  "biblioteca": {
+    "id": 1,
+    "nombre": "Biblioteca Central"
+  }
+}
 
-Ejemplos:
+---
 
-/libros?page=0&size=5
-/biblioteca?page=1&size=10
+## ⚙️ Instalación y Ejecución
 
-⚙️ Instalación y ejecución
-1️⃣ Clonar el repositorio
+### 1️⃣ Clonar el repositorio
+
+```bash
 git clone https://github.com/Nicko699/Biblioteca.git
+```
 
-2️⃣ Entrar al proyecto
+### 2️⃣ Entrar al directorio del proyecto
+
+```bash
 cd Biblioteca
+```
 
-3️⃣ Ejecutar la aplicación
+### 3️⃣ Configurar la base de datos
+
+Edita el archivo `src/main/resources/application.properties`:
+
+```properties
+# Configuración de MySQL
+spring.datasource.url=jdbc:mysql://localhost:3306/biblioteca_db
+spring.datasource.username=tu_usuario
+spring.datasource.password=tu_contraseña
+
+# Configuración de JPA/Hibernate
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true
+
+# Puerto del servidor
+server.port=8080
+```
+
+### 4️⃣ Compilar el proyecto
+
+```bash
+mvn clean install
+```
+
+### 5️⃣ Ejecutar la aplicación
+
+```bash
 mvn spring-boot:run
+```
 
+O ejecutar el JAR generado:
 
-La API quedará disponible en:
+```bash
+java -jar target/biblioteca-0.0.1-SNAPSHOT.jar
+```
 
+### 6️⃣ Acceder a la API
+
+La API estará disponible en:
+
+```
 http://localhost:8080
+```
+
+## 🧪 Probar la API con Postman
+
+### Colección de ejemplos
+
+1. **Crear una biblioteca**
+   - `POST http://localhost:8080/biblioteca`
+   - Body (JSON): Ver ejemplo anterior
+
+2. **Listar bibliotecas**
+   - `GET http://localhost:8080/biblioteca?page=0&size=10`
+
+3. **Obtener biblioteca por ID**
+   - `GET http://localhost:8080/biblioteca/1`
+
+4. **Crear un libro**
+   - `POST http://localhost:8080/libros`
+   - Body (JSON): Ver ejemplo anterior
+
+5. **Listar libros**
+   - `GET http://localhost:8080/libros?page=0&size=5`
+
+6. **Actualizar libro**
+   - `PUT http://localhost:8080/libros/1`
+
+7. **Eliminar libro**
+   - `DELETE http://localhost:8080/libros/1`
 
 
-✔ Serialización JSON segura
-✔ Códigos HTTP estándar
+
+
+
+
+
